@@ -43,10 +43,10 @@ class EntitesController {
                 Promise.all([this.poiDir.createPoi(datas)])
                     .then((result) => {
                         if(result) {
-                            return '{ok}';
+                            return result;
                         }
                         else {
-                            return '{ko}';
+                            return {'error' : 'cannot create poi'};
                         }
                     }).catch((err) => {
                     console.log(err);
