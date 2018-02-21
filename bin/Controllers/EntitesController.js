@@ -36,25 +36,15 @@ class EntitesController {
 
     addPoi(datas){
 
-        return this.poiDir.readPoiByTitleAndContent(datas).then((result) => {
-
-            if(result == null){
-
-                Promise.all([this.poiDir.createPoi(datas)])
-                    .then((result) => {
-                        if(result) {
-                            return result;
-                        }
-                        else {
-                            return {'error' : 'cannot create poi'};
-                        }
-                    }).catch((err) => {
-                    console.log(err);
-                })
-            }
-
-        });
-
+        return this.poiDir.createPoi(datas)
+            .then((result) => {
+                if(result) {
+                    return result;
+                }
+            }).catch((err) => {
+                console.log(err);
+                return err;
+            });
     }
 
     addFavori(datas){

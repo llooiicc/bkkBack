@@ -11,19 +11,36 @@ class PoiDir {
     createPoi(poiJsonValue) {
 
         return new Promise((resolve, reject) => {
-            this.Poi.create(({
-                title: poiJsonValue.title,
-                description: poiJsonValue.description,
-                lat: poiJsonValue.lat,
-                lng: poiJsonValue.lng,
-                like: 0,
-                unlike: 0,
-                verified: false
-            })).then((result) => {
-                resolve(result);
+
+            this.readPoiByTitleAndContent(poiJsonValue).then((result) => {
+
+                if(!result){
+
+                    this.Poi.create(({
+                        title: poiJsonValue.title,
+                        description: poiJsonValue.description,
+                        lat: poiJsonValue.lat,
+                        lng: poiJsonValue.lng,
+                        like: 0,
+                        unlike: 0,
+                        verified: false
+                    })).then((result) => {
+                        resolve(result);
+                    }).catch((err) => {
+                        reject(err);
+                    })
+
+                }
+                else {
+                    reject({
+                        'error': 'poi seam allready exist'
+                    })
+                }
+
             }).catch((err) => {
-                reject(err);
-            })
+               reject(err);
+            });
+
         })
     }
 

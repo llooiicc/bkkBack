@@ -5,9 +5,11 @@ let entitiesCtrl = new EntitiesController();
 
 /* GET users listing. */
 router.put('/', function(req, res, next) {
-        let result = entitiesCtrl.addPoi(req.body);
-        console.log(result);
-        res.send(result);
+        entitiesCtrl.addPoi(req.body).then((result) => {
+            console.log(result);
+            res.send(result);
+        });
+
 })
     .put('/vote/:id/:value', (req, res) => {
         let id = req.params.id;
