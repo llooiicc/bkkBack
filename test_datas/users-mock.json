@@ -1,0 +1,16 @@
+{
+  "users": [
+    "user": {
+      "login": "loic.rondel@gmail.com",
+      "password": "sabaisabai"
+    },
+    "user": {
+      "login": "loic.rondel@hotmail.com",
+      "password": "sabaisabai"
+    },
+    "user": {
+      "login": "loic.rondel@wannadoo.com",
+      "password": "sabaisabai"
+    }
+  ]
+}
